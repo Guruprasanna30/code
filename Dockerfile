@@ -1,5 +1,5 @@
 # Pull base image 
-From tomcat:8-jre8 
-
+From tomcat:latest
 # Maintainer 
-COPY ./webapp.war /usr/local/tomcat/webapps
+COPY target/webapp.war /usr/local/tomcat/webapps
+EXPOSE 8888
