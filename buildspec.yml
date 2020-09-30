@@ -14,7 +14,4 @@ phases:
       - mvn package
 artifacts:
   files:
-    - target/web.war
-    - webapp/*
-    - maven-archiver/*
-    - surefire/*
+    - '**/*'
