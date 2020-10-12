@@ -18,6 +18,22 @@ pipeline {
                 }
             }
         }
+        stage('Deploy in Kube'){
+            steps{
+                sh "chmod +x changeTag.sh"
+                sh "./changeTag.sh ${DOCKER_TAG}"
+                sshagent(['Kubemaster']) {
+                    sh "scp -o StrictHostKeyChecking=no services.yml node-app-pod.yml osboxes@192.168.1.200:/home/osboxes"
+                    script{
+                        try{
+                            sh "ssh osboxes@192.168.1.200 kubectl apply -f ."
+                        }catch(error){
+                            sh "ssh osboxes@192.168.1.200 kubectl create -f ."
+                        }
+                    }
+                }
+            }
+        }
     }
 }
 
