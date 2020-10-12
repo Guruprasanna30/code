@@ -23,7 +23,7 @@ pipeline {
                 sh "chmod +x changeTag.sh"
                 sh "./changeTag.sh ${DOCKER_TAG}"
                 sshagent(['Kubemaster']) {
-                    sh 'ssh -o StrictHostKeyChecking=no -l osboxes 192.168.1.200 uname -a'
+                    sh 'ssh -o StrictHostKeyChecking=no -l osboxes 172.16.0.200 uname -a'
                     //sh "scp -o StrictHostKeyChecking=no services.yml node-app-pod.yml osboxes@kubemaster:/home/osboxes"
                     //script{
                       //  try{
