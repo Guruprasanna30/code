@@ -23,14 +23,15 @@ pipeline {
                 sh "chmod +x changeTag.sh"
                 sh "./changeTag.sh ${DOCKER_TAG}"
                 sshagent(['Kubemaster']) {
-                    sh "scp -o StrictHostKeyChecking=no services.yml node-app-pod.yml osboxes@kubemaster:/home/osboxes"
-                    script{
-                        try{
-                            sh "ssh osboxes@kubemaster kubectl apply -f ."
-                        }catch(error){
-                            sh "ssh osboxes@kubemaster kubectl create -f ."
-                        }
-                    }
+                    sh "ssh osboxes@kubemaster ls -ltr"
+                    //sh "scp -o StrictHostKeyChecking=no services.yml node-app-pod.yml osboxes@kubemaster:/home/osboxes"
+                    //script{
+                      //  try{
+                        //    sh "ssh osboxes@kubemaster kubectl apply -f ."
+                        //}catch(error){
+                          //  sh "ssh osboxes@kubemaster kubectl create -f ."
+                        //}
+                    //}
                 }
             }
         }
